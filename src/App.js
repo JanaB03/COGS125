@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div>
+      <h1>My Portfolio</h1>  
+      <p>Welcome to my portfolio!</p>  
+
+      {/* About Section */}
+      <section>
+        <h2>About Me</h2>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          I'm an aspiring ux designer studying at ucsd
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </section>
+
+      {/* Projects Section */}
+      <section>
+        <h2>Projects</h2>
+        <p>Here are some projects I've worked on:</p>
+        <ul>
+          <li>Project 1: </li>
+          <li>Project 2: </li>
+        </ul>
+      </section>
+
+      {/* Contact Section */}
+      <section>
+        <h2>Contact</h2>
+        <p>If you'd like to get in touch, here's my email: bridijana@gmail.com</p>
+      </section>
     </div>
   );
-}
+};
 
 export default App;
