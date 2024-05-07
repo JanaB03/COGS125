@@ -1,85 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-// Styled Components for a consistent style across the portfolio
-const Container = styled.div`
+// Define styled components
+const AppContainer = styled.div`
   padding: 20px;
-  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  background: #f9f9f9;
+  text-align: center;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: 3rem;
+  color: #333;
+  transition: color 0.5s;
+
+  &:hover {
+    color: #007bff; /* Change color on hover */
+  }
 `;
 
 const Section = styled(motion.section)`
+  padding: 20px;
   margin: 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  transition: all 0.5s;
+
+  &:hover {
+    background: #f1f1f1; /* Change background on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
 `;
 
-const Heading = styled(motion.h2)`
+const Emoji = styled.span`
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-right: 10px;
 `;
 
-const Paragraph = styled(motion.p)`
-  font-size: 1.2rem;
-  color: #495057;
-`;
-
-const List = styled(motion.ul)`
-  list-style-type: square;
-  padding-left: 20px;
-`;
-
-const ListItem = styled(motion.li)`
-  font-size: 1.1rem;
-`;
-
-const contactVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const projectsVariant = {
+  hidden: { x: 100, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
 };
 
 const App = () => {
+  const [color, setColor] = useState('#ff6347'); // Initial color state
+
   return (
-    <Container>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-        <motion.h1>My Portfolio</motion.h1>
-        <Paragraph>Welcome to my portfolio!</Paragraph>
-      </motion.div>
-
-      {/* About Section */}
-      <Section
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+    <AppContainer>
+      <Title
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
+        onClick={() => setColor(color === '#ff6347' ? '#32cd32' : '#ff6347')} // Toggle color on click
+        style={{ color }}
       >
-        <Heading>About Me</Heading>
-        <Paragraph>
-          I'm an aspiring UX designer studying at UCSD. I love creating user-friendly and engaging experiences.
-        </Paragraph>
+        🌈 Welcome to My Interactive Portfolio!
+      </Title>
+
+      <Section initial={{ y: -50, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
+        <h2>About Me</h2>
+        <p>
+          <Emoji>👋</Emoji> I'm an aspiring UX designer studying at UCSD, and I
+          love creating user-friendly experiences.
+        </p>
       </Section>
 
-      {/* Projects Section */}
       <Section
-        initial={{ x: 100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Heading>Projects</Heading>
-        <Paragraph>Here are some projects I've worked on:</Paragraph>
-        <List>
-          <ListItem>Project 1: Redesigning a website for a local business</ListItem>
-          <ListItem>Project 2: Creating a mobile app for task management</ListItem>
-        </List>
-      </Section>
-
-      {/* Contact Section */}
-      <Section
-        variants={contactVariants}
+        variants={projectsVariant}
         initial="hidden"
         animate="visible"
       >
-        <Heading>Contact</Heading>
-        <Paragraph>If you'd like to get in touch, here's my email: bridijana@gmail.com</Paragraph>
+        <h2>Projects</h2>
+        <p>
+          <Emoji>💻</Emoji> Here are some projects I've worked on:
+        </p>
+        <ul>
+          <li>Project 1: Redesigning a website for a local business</li>
+          <li>Project 2: Creating a mobile app for task management</li>
+        </ul>
       </Section>
-    </Container>
+
+      <Section
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1, transition: { duration: 0.5 } }}
+      >
+        <h2>Contact</h2>
+        <p>
+          <Emoji>📧</Emoji> If you'd like to get in touch, here's my email:
+          bridijana@gmail.com
+        </p>
+      </Section>
+    </AppContainer>
   );
 };
 
